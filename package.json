@@ -1,0 +1,40 @@
+{
+  "name": "book-reading-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server/index.js",
+    "generateKey": "node genKeyPair.js",
+    "setup": "node setup.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IstiyakRiyad/Book-Reading-Backend.git"
+  },
+  "keywords": [],
+  "author": "Md Istiyak Hossain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IstiyakRiyad/Book-Reading-Backend/issues"
+  },
+  "homepage": "https://github.com/IstiyakRiyad/Book-Reading-Backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "helmet": "^5.0.2",
+    "http-errors": "^2.0.0",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
