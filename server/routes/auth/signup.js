@@ -1,31 +1,39 @@
 const router = require('express').Router();
 const createError = require('http-errors');
-const bcrypt = require('bcrypt');
 const User = require('../../models/user');
 const signUp = require('../../validators/signup');
 const {signRefreshToken} = require('../../utils/jwtUtils');
+const userInfoByPhone = require('../../utils/getFirebaseUserInfo');
+const {checkPassword} = require('../../utils/checkPassword');
 
 router.post('/', async (req, res, next) => {
     try {
-        const {name, email, password, phone} = await signUp.validateAsync(req.body);
+        const {name, phone, password} = await signUp.validateAsync(req.body);
 
         // Check if user already exists
-        const user = await User.findOne({email});
+        const user = await User.findOne({phone});
         if(user) throw createError(401, 'User Already Exists');
 
-        // Hash Password
-        const hashPassword = await bcrypt.hash(password, 12);
+        // Check Firebase base and get hash and salt
+        const {passwordHash, passwordSalt} = await userInfoByPhone(phone);
+
 
         // Create Accounts
         const newUser = new User({
             name,
-            email,
-            password: hashPassword,
             phone,
-            role: 'renter'
+            hash: passwordHash,
+            salt: passwordSalt,
+            role: 'client'
         });
 
         const createdUser = await newUser.save();
+
+        // Check the user password if it valid or not
+        const checkUser = await checkPassword(password, passwordHash, passwordSalt);
+
+        if(!checkUser) throw createError(401, 'Enter valid password');
+
 
         // Create Refresh Token
         const refreshToken = await signRefreshToken({userId: createdUser._id, role: createdUser.role}, '180d');
@@ -42,7 +50,6 @@ router.post('/', async (req, res, next) => {
             signed: true
         });
 
-        
 
         res.json({
             message: 'Account created successfully'

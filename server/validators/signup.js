@@ -7,21 +7,16 @@ const signUpSchema = Joi.object({
         .min(2)
         .max(100)
         .required(),
-    
-    email: Joi
+
+    phone: Joi
         .string()
-        .email()
+        .max(15)
         .required(),
 
     password: Joi
         .string()
         .min(6)
         .max(127)
-        .required(),
-    
-    phone: Joi
-        .string()
-        .max(15)
         .required()
 });
 

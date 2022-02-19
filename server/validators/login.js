@@ -2,9 +2,9 @@ const Joi = require('joi');
 
 
 const loginSchema = Joi.object({
-    email: Joi
+    phone: Joi
         .string()
-        .email()
+        .max(15)
         .required(),
 
     password: Joi

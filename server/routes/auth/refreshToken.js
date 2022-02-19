@@ -19,7 +19,6 @@ router.post('/', async (req, res, next) => {
 
         if(!user) throw createError(401, 'Invalid user');
         
-        if(!user.verified) throw createError(401, 'Verify your email account');
 
         // Create Refresh Token and Access Token
         const newRefreshToken = await signRefreshToken({userId: user._id, role: user.role}, '180d');

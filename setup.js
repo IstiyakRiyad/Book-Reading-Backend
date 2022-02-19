@@ -3,11 +3,12 @@ require('dotenv').config();
 const connection = require('./server/config/mongodb');
 const User = require('./server/models/user');
 const db = require('mongoose').connection;
-const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const {hashPassword} = require('./server/utils/checkPassword');
 
 const {
     ADMIN_NAME,
-    ADMIN_EMAIL,
+    ADMIN_PHONE,
     ADMIN_PASSWORD
 } = process.env;
 
@@ -18,14 +19,16 @@ connection()
         await db.dropDatabase();
         console.log('\x1b[31m%s\x1b[0m', `Database is droped`);
 
+        const salt = crypto.randomBytes(8).toString('base64');
+        const hash = await hashPassword(ADMIN_PASSWORD, salt);
+
         // Create Admin
         const user = new User({
             name: ADMIN_NAME,
-            email: ADMIN_EMAIL,
-            password: await bcrypt.hash(ADMIN_PASSWORD, 12),
-            phone: '01700000000',
-            role: 'admin',
-            verified: true,
+            phone: ADMIN_PHONE,
+            hash,
+            salt,
+            role: 'admin'
         });
 
         await user.save();

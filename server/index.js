@@ -1,6 +1,8 @@
 // Config 
 require('dotenv').config();
 
+// Config Firebase
+require('./config/firebase');
 
 // Import data
 const connection = require('./config/mongodb');

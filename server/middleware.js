@@ -1,10 +1,11 @@
 const errorTypes = {
     ValidationError: 422,
-    JsonWebTokenError: 401
+    JsonWebTokenError: 401,
+    TokenExpiredError: 401
 };
 
 const errorMessages = {
-
+    TokenExpiredError: 'Token expired'
 };
 
 

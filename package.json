@@ -21,12 +21,12 @@
   },
   "homepage": "https://github.com/IstiyakRiyad/Book-Reading-Backend#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "firebase-admin": "^10.0.2",
     "helmet": "^5.0.2",
     "http-errors": "^2.0.0",
     "joi": "^17.6.0",

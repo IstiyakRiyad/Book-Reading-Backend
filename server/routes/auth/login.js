@@ -1,22 +1,22 @@
 const router = require('express').Router();
 const createError = require('http-errors');
-const bcrypt = require('bcrypt');
 const User = require('../../models/user');
 const login = require('../../validators/login');
 const {signRefreshToken} = require('../../utils/jwtUtils');
+const {checkPassword} = require('../../utils/checkPassword');
 
 router.post('/', async (req, res, next) => {
     try {
-        const {email, password} = await login.validateAsync(req.body);
+        const {phone, password} = await login.validateAsync(req.body);
 
         // Check if user already exists
-        const user = await User.findOne({email});
+        const user = await User.findOne({phone});
 
         if(!user) throw createError(401, 'Invalid Login');
         
-
+        
         // Check Password
-        const check = await bcrypt.compare(password, user.password);
+        const check = await checkPassword(password, user.hash, user.salt);
 
         if(!check) throw createError(401, 'Invalid Login');
 

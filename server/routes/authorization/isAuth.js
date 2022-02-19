@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const {verifyAccessToken} = require('../../utils/jwtUtils');
 
-const isAuth = (req, res, next) => {
+const isAuth = async (req, res, next) => {
     try {
         const {authorization} = req.headers;
 
