@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const readBookSchema = Schema({
+    bookId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
+    currentPage: {
+        type: Number,
+        default: 0
+    }
+})
 
 const userSchema = Schema({
     name: {
@@ -30,6 +40,10 @@ const userSchema = Schema({
     },
     sessions: {
         type: Array,
+    },
+    readBooks: {
+        type: [readBookSchema],
+        default: null
     }
 }, {timestamps: true});
 
