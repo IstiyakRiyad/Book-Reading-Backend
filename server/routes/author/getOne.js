@@ -3,7 +3,7 @@ const Author = require('../../models/author');
 const createError = require('http-errors');
 
 
-router.delete('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     try {
         const {id} = req.params;
 

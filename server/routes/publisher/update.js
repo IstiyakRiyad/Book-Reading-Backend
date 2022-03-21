@@ -1,20 +1,17 @@
 const router = require('express').Router();
 const {upload, saveImage, deleteImage} = require('../../utils/imageStore');
-const Author = require('../../models/author');
+const Publisher = require('../../models/publisher');
 
 
 router.patch('/:id', upload.single('image'), async (req, res, next) => {
     try {
         const {id} = req.params;
-        const {name, birth, death, location, description} = req.body;
+        const {name, location} = req.body;
 
         const updateData = {};
 
         if(name) updateData.name = name;
-        if(birth) updateData.birth = birth;
-        if(death) updateData.death = death;
         if(location) updateData.location = location;
-        if(description) updateData.description = description;
 
         if(req.file) {
             const image = await saveImage(req.file);
@@ -22,16 +19,16 @@ router.patch('/:id', upload.single('image'), async (req, res, next) => {
         }
 
 
-        const author = await Author.findOneAndUpdate({_id: id}, {$set: updateData});
+        const publisher = await Publisher.findOneAndUpdate({_id: id}, {$set: updateData});
 
 
         res.json({
-            message: 'Author is updated successfully'
+            message: 'Publisher is updated successfully'
         });
 
         // Delete the files
         if(req.file) {
-            await deleteImage(author.image);
+            await deleteImage(publisher.image);
         }
     }
     catch(error) {

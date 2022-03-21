@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const userSchema = Schema({
+const publisherSchema = Schema({
     name: {
         type: String,
         required: true
@@ -17,15 +17,15 @@ const userSchema = Schema({
     },
     books: {
         type: Array
-    },
-    numberOfBooks: {
-        type: Number,
-        default: 0
-    }
+     },
+    // numberOfBooks: {
+    //     type: Number,
+    //     default: 0
+    // }
 }, {timestamps: true});
 
 
-const User = mongoose.model('user', userSchema);
+const Publisher = mongoose.model('publisher', publisherSchema);
 
 
-module.exports = User;
+module.exports = Publisher;

@@ -26,8 +26,7 @@ const bookSchema = Schema({
         required: true
     },
     price: {
-        type: Number,
-        required: true
+        type: Number
     },
     numberOfReader: {
         type: Number,
@@ -38,8 +37,7 @@ const bookSchema = Schema({
         default: 0
     },
     page: {
-        type: Number,
-        required: true
+        type: Number
     },
     rating: {
         type: Number,

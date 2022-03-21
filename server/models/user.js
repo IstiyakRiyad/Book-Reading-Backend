@@ -10,7 +10,7 @@ const readBookSchema = Schema({
         type: Number,
         default: 0
     }
-})
+});
 
 const userSchema = Schema({
     name: {
@@ -25,9 +25,6 @@ const userSchema = Schema({
         type: String
     },
     salt: {
-        type: String
-    },
-    email: {
         type: String
     },
     role: {
