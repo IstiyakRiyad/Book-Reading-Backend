@@ -3,29 +3,17 @@ const Schema = mongoose.Schema;
 
 
 const bookCollectionSchema = Schema({
-    week: {
-        type: Array
+    name: {
+        type: String,
+        required: true
     },
-    bestSeller: {
-        type: Array
+    count: {
+        type: Number,
+        default: 0
     },
-    popular: {
-        type: Array
-    },
-    selected: {
-        type: Array
-    },
-    favourite: {
-        type: Array
-    },
-    new: {
-        type: Array
-    },
-    upcomming: {
-        type: Array
-    },
-    popularWriter: {
-        type: Array
+    books: {
+        type: [Schema.Types.ObjectId],
+        ref: 'book'
     }
 }, {timestamps: true});
 
