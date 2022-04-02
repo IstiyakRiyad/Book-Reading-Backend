@@ -3,16 +3,18 @@ const createError = require('http-errors');
 const BookCollection = require('../../models/bookCollection');
 
 
-router.post('/',   async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
-        const { name } = req.body;
+        const {name, books} = req.body;
 
         await new BookCollection({
-            name
+            type: 'series',
+            name,
+            books
         }).save();
 
         res.json({
-            message: `${name} book collection is created successfully`
+            message: 'Series is created successfully'
         });
     }
     catch(error) {

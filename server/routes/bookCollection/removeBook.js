@@ -1,19 +1,30 @@
 const router = require('express').Router();
 const BookCollection = require('../../models/bookCollection');
+const createError = require('http-errors');
+
+// Constant
+const bookClass = require('../../constants/bookClass');
+const bookCollection = require('../../constants/bookCollection');
+const authorCollection = require('../../constants/authorCollection');
+
+const allCollections = {...bookClass, ...bookCollection, ...authorCollection};
 
 
-
-router.patch('/:id', async (req, res, next) => {
+router.patch('/:name', async (req, res, next) => {
     try {
-        const {id} = req.params;
+        const {name} = req.params;
 
-        const {bookId} = req.body;
+        const {id} = req.body;
 
-        await BookCollection.findOneAndUpdate({_id: id}, {$pull: {books: bookId}});
+        // Find the key
+        if(!allCollections[name]) throw createError(404, `${name} is not found`);
+
+
+        await BookCollection.findOneAndUpdate({name: allCollections[name]}, {$pull: {books: id}, $inc: {count: -1}});
 
 
         res.json({
-            message: 'Book is removed from the collection successfully'
+            message: 'Item is removed from the collection successfully'
         });
     }
     catch(error) {

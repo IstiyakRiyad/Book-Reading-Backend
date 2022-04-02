@@ -6,15 +6,17 @@ const isAdmin = require('../authorization/isAdmin');
 
 
 // Imports Routes
+const create = require('./create');
 const getOne = require('./getOne');
-const update = require('./removeBook');
-const addBook = require('./addBook');
+const getAll = require('./getAll');
+const deleteOne = require('./delete');
 
 
 
 // Middleware
 router.use('/', getOne);
-router.use('/', isAuth, isAdmin, update);
-router.use('/', isAuth, isAdmin, addBook);
+router.use('/', getAll);
+router.use('/', isAuth, isAdmin, create);
+router.use('/', isAuth, isAdmin, deleteOne);
 
 module.exports = router;

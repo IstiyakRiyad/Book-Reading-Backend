@@ -10,7 +10,10 @@ const publisher = require('./publisher');
 const category = require('./category');
 const subCategory = require('./subCategory');
 const book = require('./book');
+const series = require('./series');
 const bookCollection = require('./bookCollection');
+const home = require('./home');
+
 
 
 // Middleware
@@ -21,6 +24,10 @@ router.use('/publisher', publisher);
 router.use('/category', category);
 router.use('/subCategory', subCategory);
 router.use('/book', book);
+router.use('/series', series);
 router.use('/collection', bookCollection);
+router.use('/home', home);
+
+
 
 module.exports = router;

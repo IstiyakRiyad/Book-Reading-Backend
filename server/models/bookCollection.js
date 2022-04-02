@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 
 const bookCollectionSchema = Schema({
+    type: {
+        type: String,
+        default: 'class'
+    },
     name: {
         type: String,
         required: true

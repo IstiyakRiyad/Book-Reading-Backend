@@ -7,12 +7,12 @@ router.delete('/:id', async (req, res, next) => {
     try {
         const {id} = req.params;
 
-        const collection = await BookCollection.findOneAndDelete({_id: id});
+        const series = await BookCollection.findOneAndDelete({_id: id, type: 'series'});
 
-        if(!collection) throw createError(404, 'Collection not found');
+        if(!series) throw createError(404, 'Series not found');
 
         res.json({
-            message: `${collection.name} book collection is deleted`
+            message: 'Series is deleted successfully'
         });
     }
     catch(error) {
