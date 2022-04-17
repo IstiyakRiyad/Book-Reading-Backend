@@ -1,12 +1,12 @@
 module.exports = {
-    biography: 'Jiboni',
-    scienceFiction: 'Science Fiction',
-    childHistory: 'Sisu Sahito',
-    pragraph: 'Rochona',
-    fiction: 'Fiction',
-    translated: 'Onubad',
-    poem: 'Kobita',
-    novel: 'Uponash',
-    religion: 'Dhormiyo',
-    history: 'Itihash'
+    biography: 'জীবনী',
+    scienceFiction: 'সায়েন্স ফিকশন',
+    childHistory: 'শিশু সাহিত্য',
+    paragraph: 'রচনা',
+    fiction: 'ফিকশন',
+    translated: 'অনুবাদ',
+    poem: 'কবিতা',
+    novel: 'উপন্যাস',
+    religion: 'ধর্মীয়',
+    history: 'ইতিহাস'
 };

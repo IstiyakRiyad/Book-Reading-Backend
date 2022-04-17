@@ -1,3 +1,3 @@
 module.exports = {
-    popularAuthor: 'Popular lekhok'
+    popularAuthor: 'জনপ্রিয় লেখক'
 };
