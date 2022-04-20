@@ -7,7 +7,7 @@ router.get('/', async (req, res, next) => {
     try {
         const totalCount = await Book.find({}).countDocuments();
 
-        const {skip, limit} = pagination(req.query);
+        const {skip, limit} = pagination(req.query, totalCount);
 
         const books = await Book
             .find({}, {_id: 1, name: 1, image: 1})
