@@ -7,7 +7,9 @@ router.get('/:id', async (req, res, next) => {
     try {
         const {id} = req.params;
 
-        const book = await Book.findOne({_id: id}, {__v: 0});
+        const book = await Book
+            .findOne({_id: id}, {__v: 0})
+            .populate('writer publisher category subCategory', '_id name image');
 
         if(!book) throw createError(404, 'Book not found');
 

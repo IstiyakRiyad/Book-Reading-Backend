@@ -16,7 +16,7 @@ router.patch('/:id', upload.fields([{name: 'image', maxCount: 1}, {name: 'pdfFil
             publisherId,
             categoryId,
             subCategoryId,
-            isbn,
+            language,
             year,
             edition
         } = req.body;
@@ -28,11 +28,11 @@ router.patch('/:id', upload.fields([{name: 'image', maxCount: 1}, {name: 'pdfFil
         if(price) updateData.price = price;
         if(page) updateData.page = page;
         if(description) updateData.description = description;
-        if(writerId) updateData.writerId = writerId;
-        if(publisherId) updateData.publisherId = publisherId;
-        if(categoryId) updateData.categoryId = categoryId;
-        if(subCategoryId) updateData.subCategoryId = subCategoryId;
-        if(isbn) updateData.isbn = isbn;
+        if(writerId) updateData.writer = writerId;
+        if(publisherId) updateData.publisher = publisherId;
+        if(categoryId) updateData.category = categoryId;
+        if(subCategoryId) updateData.subCategory = subCategoryId;
+        if(language) updateData.language = language;
         if(year) updateData.year = year;
         if(edition) updateData.edition = edition;
 

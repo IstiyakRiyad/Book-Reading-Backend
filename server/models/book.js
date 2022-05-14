@@ -55,24 +55,28 @@ const bookSchema = Schema({
         type: String,
         required: true
     },
-    writerId: {
+    writer: {
         type: Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'author'
     },
-    publisherId: {
+    publisher: {
         type: Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'publisher'
     },
-    categoryId: {
+    category: {
         type: Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'category'
     },
-    subCategoryId: {
+    subCategory: {
         type: Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'subcategory'
     },
-    isbn: {
-        type: Number,
+    language: {
+        type: String,
         required: true
     },
     year: {
