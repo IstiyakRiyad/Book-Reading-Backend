@@ -12,7 +12,7 @@ router.get('/:id', async (req, res, next) => {
 
         if(!author) throw createError(404, 'Author not found');
 
-        const books = await Book.find({writerId: author._id}, {_id: 1, name: 1, image: 1, rating: 1});
+        const books = await Book.find({writerId: author._id}, {_id: 1, name: 1, image: 1, rating: 1, numberOfRating: 1});
 
 
         const authorData = author.toJSON();
