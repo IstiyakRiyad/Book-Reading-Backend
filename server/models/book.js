@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const commentSchema = Schema({
-    userId: {
+    user: {
         type: Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'user'
     },
     rating: {
         type: Number,
@@ -15,6 +16,7 @@ const commentSchema = Schema({
         required: true
     }
 }, {timestamps: true});
+
 
 const bookSchema = Schema({
     name: {
@@ -97,6 +99,10 @@ const bookSchema = Schema({
     },
     comments: {
         type: [commentSchema],
+        default: []
+    },
+    likes: {
+        type: [Schema.Types.ObjectId],
         default: []
     }
 }, {timestamps: true});
