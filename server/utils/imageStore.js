@@ -2,19 +2,19 @@ const path = require('path');
 const fs = require('fs/promises');
 const crypto = require('crypto');
 const multer = require('multer');
-const sharp = require('sharp');
+// const sharp = require('sharp');
 
 
 const formatImage = async (buffer, width, height) => {
-    const image = await sharp(buffer)
-        .rotate()
-        .resize({
-            width, 
-            height,
-            fit: sharp.fit.cover
-        })
-        .jpeg({ mozjpeg: true })
-        .toBuffer();
+    // const image = await sharp(buffer)
+    //     .rotate()
+    //     .resize({
+    //         width, 
+    //         height,
+    //         fit: sharp.fit.cover
+    //     })
+    //     .jpeg({ mozjpeg: true })
+    //     .toBuffer();
 
     return image;
 }
