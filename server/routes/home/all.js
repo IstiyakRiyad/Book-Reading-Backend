@@ -12,8 +12,16 @@ router.get('/', async (req, res, next) => {
             {type: 'book'},
             {__v: 0, type: 0, count: 0, books: {$slice: 5}}
         )
-        .populate('books', '_id name image');
-        
+        .populate({ 
+            path: 'books',
+            select: '_id name image rating numberOfRating writer',
+            populate: {
+             path: 'writer',
+             model: 'author',
+             select: 'name'
+            }
+         });
+
         // Book series
         const series = await BookCollection.find(
             {type: 'series'}, 
@@ -27,8 +35,10 @@ router.get('/', async (req, res, next) => {
         // Audio books
         const audioBook = await Book.find(
             {audioFile: {$exists: true, $ne: null}}, 
-            {_id: 1, name: 1, image: 1}
-        );
+            {_id: 1, name: 1, image: 1, rating: 1, numberOfRating: 1}
+        )
+        .sort({_id: -1})
+        .limit(5);
 
         // Book Collections
         const bookCollections = await BookCollection.find(
@@ -37,7 +47,15 @@ router.get('/', async (req, res, next) => {
         )
         .sort({_id: -1})
         .limit(5)
-        .populate('books', '_id name image');
+        .populate({ 
+            path: 'books',
+            select: '_id name image rating numberOfRating writer',
+            populate: {
+             path: 'writer',
+             model: 'author',
+             select: 'name'
+            }
+         });
 
         
         // Popular writers

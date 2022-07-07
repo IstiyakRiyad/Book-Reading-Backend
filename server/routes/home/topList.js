@@ -9,19 +9,19 @@ const Publisher = require('../../models/publisher');
 router.get('/', async (req, res, next) => {
     try {
         // Audio books
-        const audioBook = await Book.find(
-            {audioFile: {$exists: true, $ne: null}}, 
-            {_id: 1, name: 1, image: 1}
-        );
+        // const audioBook = await Book.find(
+        //     {audioFile: {$exists: true, $ne: null}}, 
+        //     {_id: 1, name: 1, image: 1}
+        // );
 
-        // Book Collections
-        const bookCollections = await BookCollection.find(
-            {type: 'class'},
-            {__v: 0, type: 0, count: 0, books: {$slice: 1}}
-        )
-        .sort({_id: -1})
-        .limit(5)
-        .populate('books', '_id name image');
+        // // Book Collections
+        // const bookCollections = await BookCollection.find(
+        //     {type: 'class'},
+        //     {__v: 0, type: 0, count: 0, books: {$slice: 1}}
+        // )
+        // .sort({_id: -1})
+        // .limit(5)
+        // .populate('books', '_id name image');
 
         
         // Popular writers
