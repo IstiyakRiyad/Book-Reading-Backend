@@ -16,7 +16,7 @@ const formatImage = async (buffer, width, height) => {
     //     .jpeg({ mozjpeg: true })
     //     .toBuffer();
 
-    return image;
+    return buffer;
 }
 
 const memoryStorage = multer.memoryStorage();
