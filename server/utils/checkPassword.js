@@ -1,5 +1,5 @@
-const { createCipheriv, scrypt, timingSafeEqual } = require('crypto');
-
+const { createCipheriv, timingSafeEqual } = require('crypto');
+const {scrypt} = require('scrypt-js');
 // Credential For hashing
 const {
     base64_signer_key,
@@ -23,8 +23,8 @@ const base64decode = (encoded) => {
 }
 
 
-const hashPassword = (password, salt) => {
-    return new Promise((resolve, reject) => {
+const hashPassword = async (password, salt) => {
+    //return new Promise((resolve, reject) => {
         const bSalt = Buffer.concat([
             base64decode(salt),
             base64decode(base64_salt_separator),
@@ -32,35 +32,44 @@ const hashPassword = (password, salt) => {
         
         const iv = Buffer.alloc(IV_LENGTH, 0);
 
+        const passwordBuffer = Buffer.from(password, 'utf-8');
 
         // Hasing Password
-        scrypt(
-            password, 
-            bSalt, 
-            KEYLEN,
-            {
-                N: 2 ** mem_cost,
-                r: rounds,
-                p: 1
-            },
-            (error, derivedKey) => {
-                if(error) {
-                    return reject(error);
-                }
-                try {
-                    const cipher = createCipheriv(ALGORITHM, derivedKey, iv);
-                    resolve(
-                        Buffer.concat([
-                            cipher.update(base64decode(base64_signer_key)), 
-                            cipher.final() 
-                        ]).toString('base64')
-                    );
-                }
-                catch(error) {
-                    reject(error);
-                }
-            })
-    });
+        const derivedKey = await scrypt(passwordBuffer, bSalt, 2 ** mem_cost, rounds, 1, KEYLEN);
+
+        const cipher = createCipheriv(ALGORITHM, derivedKey, iv);
+
+        return Buffer.concat([
+            cipher.update(base64decode(base64_signer_key)), 
+            cipher.final() 
+        ]).toString('base64');
+
+        // scrypt(
+        //     password, 
+        //     bSalt, 
+        //     KEYLEN,
+        //     {
+        //         N: 2 ** mem_cost,
+        //         r: rounds,
+        //         p: 1
+        //     },
+        //     (error, derivedKey) => {
+        //         if(error) {
+        //             return reject(error);
+        //         }
+        //         try {
+        //             const cipher = createCipheriv(ALGORITHM, derivedKey, iv);
+        //             resolve(
+        //                 Buffer.concat([
+        //                     cipher.update(base64decode(base64_signer_key)), 
+        //                     cipher.final() 
+        //                 ]).toString('base64')
+        //             );
+        //         }
+        //         catch(error) {
+        //             reject(error);
+        //         }
+        //     })
 }
 
 const checkPassword = async (password, hash, salt) => {

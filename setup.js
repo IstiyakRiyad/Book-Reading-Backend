@@ -23,7 +23,7 @@ connection()
 .then(async () => {
     try {
         // Drop the database
-        await db.dropDatabase();
+ //       await db.dropDatabase();
         console.log('\x1b[31m%s\x1b[0m', `Database is droped`);
 
         const salt = crypto.randomBytes(8).toString('base64');
