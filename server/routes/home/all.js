@@ -35,10 +35,11 @@ router.get('/', async (req, res, next) => {
         // Audio books
         const audioBook = await Book.find(
             {audioFile: {$exists: true, $ne: null}}, 
-            {_id: 1, name: 1, image: 1, rating: 1, numberOfRating: 1}
+            {_id: 1, name: 1, image: 1, rating: 1, numberOfRating: 1, writer: 1}
         )
         .sort({_id: -1})
-        .limit(5);
+        .limit(5)
+        .populate('writer', '_id name');
 
         // Book Collections
         const bookCollections = await BookCollection.find(

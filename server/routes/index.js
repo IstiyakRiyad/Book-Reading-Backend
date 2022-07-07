@@ -13,6 +13,7 @@ const book = require('./book');
 const series = require('./series');
 const bookCollection = require('./bookCollection');
 const home = require('./home');
+const search = require('./search');
 
 
 
@@ -27,6 +28,7 @@ router.use('/book', book);
 router.use('/series', series);
 router.use('/collection', bookCollection);
 router.use('/home', home);
+router.use('/search', search);
 
 
 

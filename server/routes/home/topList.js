@@ -29,27 +29,28 @@ router.get('/', async (req, res, next) => {
             {type: 'author'},
             {__v: 0, type: 0, count: 0, books: {$slice: 7}}
         );
-        const authors = await Author.findOne({_id: {$in: popularAuthor.books}}, {_id: 1, name: 1, image: 1});
+        const authors = await Author.find({_id: {$in: popularAuthor.books}}, {_id: 1, name: 1, image: 1});
 
-        const popularWriter = popularAuthor.toJSON();
-        delete popularWriter.books;
-        popularWriter.authors = authors ? authors.toJSON() : [];
+        // const popularWriter = popularAuthor.toJSON();
+        // delete popularWriter.books;
+        // popularWriter.authors = authors ? authors.toJSON() : [];
         
         // Publisher
         const publishers = await Publisher
-            .find({}, {__v: 0})
+            .find({}, {__v: 0, books: 0})
             .sort({_id: -1})
             .limit(15);
 
 
         const books = await Book
-            .find({}, {_id: 1, name: 1, image: 1})
+            .find({}, {_id: 1, name: 1, image: 1, rating: 1, numberOfRating: 1, writer: 1})
             .sort({_id: -1})
-            .limit(15);
+            .limit(15)
+            .populate('writer', '_id name');
 
 
         res.json({
-            message: 'Home details',
+            message: 'Top list details',
             books,
             publishers,
             authors
