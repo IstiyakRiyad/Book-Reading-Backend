@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
             });
         
         res.json({
-            message: 'Filter data',
+            message: 'Filter and search data',
             books
         });
 
