@@ -15,6 +15,8 @@ const bookCollection = require('./bookCollection');
 const home = require('./home');
 const search = require('./search');
 const dashboard = require('./dashboard')
+const user = require('./user');
+const bookShelf = require('./bookShelf');
 
 
 // Middleware
@@ -30,6 +32,8 @@ router.use('/collection', bookCollection);
 router.use('/home', home);
 router.use('/search', search);
 router.use('/dashboard', dashboard);
+router.use('/user', isAuth, user);
+router.use('/bookShelf', isAuth, bookShelf);
 
 
 

@@ -15,7 +15,7 @@ const readBookSchema = Schema({
         type: Number,
         default: 0
     }
-});
+}, {timestamps: true});
 
 const userSchema = Schema({
     name: {
@@ -46,6 +46,10 @@ const userSchema = Schema({
     readBooks: {
         type: [readBookSchema],
         default: null
+    },
+    bookShelf: {
+        type: [Schema.Types.ObjectId],
+        ref: 'book'
     }
 }, {timestamps: true});
 

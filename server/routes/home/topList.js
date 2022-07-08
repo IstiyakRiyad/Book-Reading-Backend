@@ -43,7 +43,7 @@ router.get('/', async (req, res, next) => {
 
 
         const books = await Book
-            .find({}, {_id: 1, name: 1, image: 1, rating: 1, numberOfRating: 1, writer: 1})
+            .find({}, {_id: 1, name: 1, image: 1, rating: 1, numberOfRating: 1, writer: 1, pdfFile: 1, audioFile: 1})
             .sort({_id: -1})
             .limit(15)
             .populate('writer', '_id name');
