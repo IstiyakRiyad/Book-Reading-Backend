@@ -22,11 +22,11 @@ router.get('/:name', async (req, res, next) => {
         if(authorCollection[name]) {
             const collection = await BookCollection.findOne({name: authorCollection[name], type: 'author'}, {__v: 0, type: 0});
 
-            const authors = await Author.findOne({_id: {$in: collection.books}}, {_id: 1, name: 1, image: 1});
+            const authors = await Author.find({_id: {$in: collection.books}}, {_id: 1, name: 1, image: 1});
 
             author = collection.toJSON();
             delete author.books;
-            author.authors = authors ? authors.toJSON() : [];
+            author.authors = authors ? authors : [];
         }
         else {
             book = await BookCollection
