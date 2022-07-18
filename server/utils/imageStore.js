@@ -24,9 +24,12 @@ const upload = multer({ storage: memoryStorage });
 
 
 const saveImage = async (image) => {
-    const {buffer} = image;
+    const {buffer, mimetype} = image;
     
-    const imageName = `${Date.now()}${crypto.randomBytes(20).toString('hex')}.jpeg`;
+    let ext = mimetype.split('/')[1];
+    if(ext === 'svg+xml') ext = 'svg';
+
+    const imageName = `${Date.now()}${crypto.randomBytes(20).toString('hex')}.${ext}`;
 
     // Convert Image 
     const smallImage = await formatImage(buffer, 300, 460);

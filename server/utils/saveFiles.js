@@ -4,9 +4,12 @@ const crypto = require('crypto');
 
 
 const saveFile = async (file) => {
-    const {buffer} = file;
+    const {buffer, mimetype} = file;
     
-    const fileName = `${Date.now()}${crypto.randomBytes(20).toString('hex')}.jpeg`;
+    let ext = mimetype.split('/')[1];
+    if(ext === 'svg+xml') ext = 'svg';
+
+    const fileName = `${Date.now()}${crypto.randomBytes(20).toString('hex')}.${ext}`;
 
 
     // Save the files
