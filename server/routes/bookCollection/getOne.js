@@ -15,8 +15,8 @@ router.get('/:name', async (req, res, next) => {
     try {
         const {name} = req.params;
 
-         // Find the key
-         if(!allCollections[name]) throw createError(404, `${name} is not found`);
+        // Find the key
+        if(!allCollections[name]) throw createError(404, `${name} is not found`);
 
         let author, book;
         if(authorCollection[name]) {

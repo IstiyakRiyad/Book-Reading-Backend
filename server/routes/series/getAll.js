@@ -14,7 +14,15 @@ router.get('/', async (req, res, next) => {
             .sort({_id: -1})
             .skip(skip)
             .limit(limit)
-            .populate('books', '_id name image');
+            .populate({ 
+                path: 'books',
+                select: '_id name image rating numberOfRating writer',
+                populate: {
+                 path: 'writer',
+                 model: 'author',
+                 select: 'name'
+                }
+             });
 
 
         res.json({

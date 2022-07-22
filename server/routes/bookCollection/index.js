@@ -9,10 +9,11 @@ const isAdmin = require('../authorization/isAdmin');
 const getOne = require('./getOne');
 const update = require('./removeBook');
 const addBook = require('./addBook');
-
+const getOneById = require('./getOneById');
 
 
 // Middleware
+router.use('/id', getOneById);
 router.use('/', getOne);
 router.use('/', isAuth, isAdmin, update);
 router.use('/', isAuth, isAdmin, addBook);
