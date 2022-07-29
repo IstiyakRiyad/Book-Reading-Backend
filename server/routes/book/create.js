@@ -18,7 +18,8 @@ router.post('/', upload.fields([{name: 'image', maxCount: 1}, {name: 'pdfFile', 
             subCategoryId,
             language,
             year,
-            edition
+            edition,
+            awards
         } = req.body;
 
         if(!req.files || !req.files.image) throw createError(422, 'Image must be provided');
@@ -47,6 +48,7 @@ router.post('/', upload.fields([{name: 'image', maxCount: 1}, {name: 'pdfFile', 
             language,
             year,
             edition,
+            awards,
             pdfFile,
             audioFile
         }).save();

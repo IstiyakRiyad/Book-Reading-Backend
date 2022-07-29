@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
 
 
         res.json({
-            message: 'Book class details',
+            message: 'Book collection details',
             bookCollections
         });
     }

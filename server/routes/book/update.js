@@ -18,7 +18,8 @@ router.patch('/:id', upload.fields([{name: 'image', maxCount: 1}, {name: 'pdfFil
             subCategoryId,
             language,
             year,
-            edition
+            edition,
+            awards
         } = req.body;
 
 
@@ -35,6 +36,7 @@ router.patch('/:id', upload.fields([{name: 'image', maxCount: 1}, {name: 'pdfFil
         if(language) updateData.language = language;
         if(year) updateData.year = year;
         if(edition) updateData.edition = edition;
+        if(awards) updateData.awards = awards;
 
         if(!req.files && !req.files.image[0]) {
             updateData.image = await saveImage(req.files.image[0]);

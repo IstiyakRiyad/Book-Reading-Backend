@@ -22,7 +22,7 @@ router.post('/', async (req, res, next) => {
 
         // Create Refresh Token and Access Token
         const newRefreshToken = await signRefreshToken({userId: user._id, role: user.role}, '180d');
-        const newAccessToken = await signAccessToken({userId: user._id, role: user.role}, '5m');
+        const newAccessToken = await signAccessToken({userId: user._id, role: user.role}, '1d');
 
 
         // Push cookie to sessions in user object

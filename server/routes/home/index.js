@@ -8,6 +8,7 @@ const oneClass = require('./class');
 const topList = require('./topList');
 const audioBook = require('./audioBook');
 const collection = require('./collection');
+const popularAuthor = require('./popularAuthor');
 
 
 // Middleware
@@ -17,6 +18,8 @@ router.use('/allClass', oneClass);
 router.use('/topList', topList);
 router.use('/audio', audioBook);
 router.use('/collection', collection);
+router.use('/popularAuthor', popularAuthor);
+
 
 
 module.exports = router;

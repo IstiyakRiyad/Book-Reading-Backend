@@ -49,7 +49,7 @@ const bookSchema = Schema({
         type: Number,
         default: 0
     },
-    award: {
+    awards: {
         type: Number,
         default: 0
     },
@@ -86,8 +86,7 @@ const bookSchema = Schema({
         required: true
     },
     edition: {
-        type: Number,
-        default: 1
+        type: String
     },
     pdfFile: {
         type: String,
