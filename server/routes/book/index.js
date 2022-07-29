@@ -17,12 +17,14 @@ const giveFeedback = require('./giveFeedback');
 const removeFeedback = require('./removeFeedback');
 const startReading = require('./startReading');
 const updatePage = require('./updatePage');
+const userBookInfo = require('./userBookInfo');
 
 
 
 // Middleware
 router.use('/', getOne);
 router.use('/', getAll);
+router.use('/userInfo', isAuth, userBookInfo);
 router.use('/giveLike', isAuth, giveLike);
 router.use('/removeLike', isAuth, removeLike);
 router.use('/insertComment', isAuth, giveFeedback);

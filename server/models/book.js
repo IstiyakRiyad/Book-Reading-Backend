@@ -50,8 +50,8 @@ const bookSchema = Schema({
         default: 0
     },
     awards: {
-        type: Number,
-        default: 0
+        type: String,
+        default: null
     },
     description: {
         type: String,
