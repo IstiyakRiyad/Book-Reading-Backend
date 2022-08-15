@@ -8,11 +8,13 @@ const isAdmin = require('../authorization/isAdmin');
 // Imports Routes
 const create = require('./create');
 const getAll = require('./getAll');
+const getOne = require('./getOne');
 const deleteOne = require('./delete');
 const update = require('./update');
 
 
 // Middleware
+router.use('/', getOne);
 router.use('/', getAll);
 router.use('/', isAuth, isAdmin, create);
 router.use('/', isAuth, isAdmin, deleteOne);
