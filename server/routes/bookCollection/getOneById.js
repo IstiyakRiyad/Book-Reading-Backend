@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const BookCollection = require('../../models/bookCollection');
 const Author = require('../../models/author');
+const Publisher = require('../../models/publisher');
 const createError = require('http-errors');
 
 
@@ -33,6 +34,15 @@ router.get('/:collectionId', async (req, res, next) => {
             collection = collection.toJSON();
             delete collection.books;
             collection.authors = authors ? authors : [];
+        }
+        else if(collection.type === 'publisher') {
+            collection = await BookCollection.findOne({_id: collectionId, type: 'publisher'}, {__v: 0});
+
+            const publishers = await Publisher.find({_id: {$in: collection.books}}, {_id: 1, name: 1, image: 1});
+
+            collection = collection.toJSON();
+            delete collection.books;
+            collection.publishers =  publishers ? publishers : [];
         }
 
         res.json({

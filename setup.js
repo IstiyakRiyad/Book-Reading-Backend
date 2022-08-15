@@ -11,6 +11,7 @@ const {hashPassword} = require('./server/utils/checkPassword');
 const bookClass = require('./server/constants/bookClass');
 const bookCollection = require('./server/constants/bookCollection');
 const authorCollection = require('./server/constants/authorCollection');
+const publisherCollection = require('./server/constants/publisherCollection');
 
 
 const {
@@ -46,7 +47,8 @@ connection()
         await BookCollection.insertMany([
             ...Object.values(bookClass).map(name => ({name})),
             ...Object.values(bookCollection).map(name => ({name, type: 'book'})),
-            ...Object.values(authorCollection).map(name => ({name, type: 'author'}))
+            ...Object.values(authorCollection).map(name => ({name, type: 'author'})),
+            ...Object.values(publisherCollection).map(name => ({name, type: 'publisher'}))
         ]);
 
         db.close();

@@ -53,10 +53,9 @@ router.get('/', async (req, res, next) => {
         
         // Publisher
         if(isPublishers) {
-            publishers = await Publisher
-                .find({}, {__v: 0, books: 0})
-                .sort({_id: -1})
-                .limit(15);
+            collection = await BookCollection.findOne({type: 'publisher'}, {__v: 0});
+
+            publishers = await Publisher.find({_id: {$in: collection.books}}, {__v: 0, books: 0});
         }
 
         if(isBooks) {

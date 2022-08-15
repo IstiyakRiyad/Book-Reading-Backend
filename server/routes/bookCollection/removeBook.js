@@ -6,8 +6,9 @@ const createError = require('http-errors');
 const bookClass = require('../../constants/bookClass');
 const bookCollection = require('../../constants/bookCollection');
 const authorCollection = require('../../constants/authorCollection');
+const publisherCollection = require('../../constants/publisherCollection');
 
-const allCollections = {...bookClass, ...bookCollection, ...authorCollection};
+const allCollections = {...bookClass, ...bookCollection, ...authorCollection, ...publisherCollection};
 
 
 router.patch('/:name', async (req, res, next) => {
