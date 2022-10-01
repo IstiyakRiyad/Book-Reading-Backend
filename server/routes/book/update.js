@@ -38,15 +38,15 @@ router.patch('/:id', upload.fields([{name: 'image', maxCount: 1}, {name: 'pdfFil
         if(edition) updateData.edition = edition;
         if(awards) updateData.awards = awards;
 
-        if(!req.files && !req.files.image[0]) {
+        if(req.files && req.files.image) {
             updateData.image = await saveImage(req.files.image[0]);
         }
 
-        if(!req.files && !req.files.pdfFile[0]) {
+        if(req.files && req.files.pdfFile) {
             updateData.pdfFile = await saveFile(req.files.pdfFile[0]);
         }
 
-        if(!req.files && !req.files.audioFile[0]) {
+        if(req.files && req.files.audioFile) {
             updateData.audioFile = await saveFile(req.files.audioFile[0]);
         }
 

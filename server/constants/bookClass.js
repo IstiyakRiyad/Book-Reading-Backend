@@ -2,7 +2,7 @@ module.exports = {
     biography: 'জীবনী',
     scienceFiction: 'সায়েন্স ফিকশন',
     childHistory: 'শিশু সাহিত্য',
-    paragraph: 'রচনা',
+    nonFiction: 'নন-ফিকশন',
     fiction: 'ফিকশন',
     translated: 'অনুবাদ',
     poem: 'কবিতা',
