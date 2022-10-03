@@ -13,10 +13,17 @@ router.patch('/:bookId', async (req, res, next) => {
         if(!(type === 'pdf' || type === 'audio')) throw createError(403, 'pdf and audio is only type option');
         
         const user = await User.findOneAndUpdate(
-            {_id: userId, $or: [
-                {'readBooks.type': {$ne: type}, 'readBooks.book': {$ne: bookId}},
-                {'readBooks.type': {$ne: type}, 'readBooks.book': bookId}
-            ]},
+            {
+                _id: userId, 
+                readBooks:{ 
+                    $not: {
+                        $elemMatch: {
+                            type,
+                            book: bookId
+                        }
+                    }
+                },
+            },
             {$push: {readBooks: {book: bookId, type}}}
         )
 

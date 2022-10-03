@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const createError = require('http-errors');
-const Book = require('../../models/book');
 const User = require('../../models/user');
+const {ObjectId} = require('mongoose').Types;
 
 
 router.patch('/:bookId', async (req, res, next) => {
@@ -13,8 +13,16 @@ router.patch('/:bookId', async (req, res, next) => {
         if(!(type === 'pdf' || type === 'audio')) throw createError(403, 'pdf and audio is only type option');
         
         await User.findOneAndUpdate(
-            {_id: userId, 'readBooks.book': bookId, 'readBooks.type': type},
-            {$set: {'readBooks.$.currentPage': page}}
+            {
+                _id: userId
+            },
+            {$set: {'readBooks.$[index].currentPage': page}},
+            {
+                arrayFilters: [{
+                    "index.book": bookId,
+                    "index.type": type
+                }]
+            }
         )
 
         res.json({
